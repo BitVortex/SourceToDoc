@@ -78,7 +78,7 @@ Runtime (Converter): 1075.97 seconds
 ## Results 2024-09-26+ *(commit 50d9f1d)*
 Every sample project was run twice. On one execution, `--dg_disable_dot_graphs` was added to the command.  
 
-Added `"--tc_coverage_tyoe cmake` for CMake projects. CMake Projects had to be modified for test coverage support as follows:
+Added `--tc_coverage_type cmake` for CMake projects. CMake Projects had to be modified for test coverage support as follows:
 
 ### CMake Tutorial Step 5
 - "Finish the Tutorial"
@@ -90,14 +90,14 @@ append_coverage_compiler_flags()
 ```
 - add https://github.com/bilke/cmake-modules/blob/master/CodeCoverage.cmake to project's root/modules
 
-### FOX Toolkt (cmake fork)
+### FOX Toolkit (cmake fork)
 - add line `enable_testing()` to CMakeLists.txt
 - Still says `No tests were found!!!` (not necessarily our problem)
 - **Removed for redundancy** as this adds nothing new except the CMake build
 
 ### C++ Best Practices Template
-- see CMake Tutorial Step 5 (exclding the "Finish the Tutorial" step)
-- because of converter bug: src/ftxui_sample/main.cpp nt main(...) -> int main
+- see CMake Tutorial Step 5 (excluding the "Finish the Tutorial" step)
+- because of converter bug: src/ftxui_sample/main.cpp: nt main(...) -> int main
 Ran, but did not finish :/
 (build/_deps/catch2-build/src/src/catch2/internal/... expected, but hierarchy ended at build/_deps/catch2-build/src)
 - worked on another machine ...for some unexplainable reason

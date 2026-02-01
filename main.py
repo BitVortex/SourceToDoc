@@ -1,4 +1,5 @@
 from os import chdir
+from pathlib import Path
 from time import time
 from shutil import copytree
 
@@ -6,9 +7,12 @@ from sourcetodoc.cli.ConfiguredParser import ConfiguredParser
 from sourcetodoc.common.Config import Config
 from sourcetodoc.docstring.cli import run_comment_converter
 from sourcetodoc.docgen.doc_gen import run_documentation_generation
-from sourcetodoc.testcoverage.cover_meson import *
-from sourcetodoc.testcoverage.cover_cmake import *
-from sourcetodoc.testcoverage.linker import *
+from sourcetodoc.testcoverage.cover_meson import run_meson
+from sourcetodoc.testcoverage.cover_cmake import run_cmake
+from sourcetodoc.testcoverage.linker import (
+    link_all_tc_report_and_documentation_files,
+    link_tc_report_and_documentation_main,
+)
 from sourcetodoc.uml.cli import run_uml_diagrams_generation
 
 
@@ -42,7 +46,7 @@ if __name__ == "__main__":
     t_converter: float = time()
 
     # documentation generation
-    if config.args.disable_doc_gen:
+    if not config.args.disable_doc_gen:
         print("\nDocumentation Generation:\n")
         try:
             run_documentation_generation(config)
@@ -54,7 +58,7 @@ if __name__ == "__main__":
     t_docgen: float = time()
     
     # coverage
-    if config.args.disable_test_cov:
+    if not config.args.disable_test_cov:
         print("\nTest Coverage Evaluation:\n")
         try:
             chdir(config.root_path)
@@ -115,7 +119,7 @@ if __name__ == "__main__":
             print("Continuing without generating test coverage report...")
 
         # Link coverage report and documentation
-        if config.args.disable_doc_gen:  # can not link TC report to generated documentation, if no documentation was generated
+        if not config.args.disable_doc_gen:  # can not link TC report to generated documentation, if no documentation was generated
             try:
                 link_tc_report_and_documentation_main(config.out_path_relative / Path(config.args.project_name))
                 link_all_tc_report_and_documentation_files(config.out_path_relative / Path(config.args.project_name))
@@ -131,7 +135,7 @@ if __name__ == "__main__":
         try:
             run_uml_diagrams_generation(parser, config)
         except Exception as e:
-            error_in_lnk = f"Exception occured while generating UML diagrams:\n{e}"
+            error_in_uml = f"Exception occured while generating UML diagrams:\n{e}"
             print(error_in_uml)
             print("Continuing without generating further UML...")
     

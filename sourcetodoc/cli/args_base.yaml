@@ -30,12 +30,12 @@
     help: Disable the documentation generation part of the toolchain. 
     type: bool
     short: dDG
-    default: True
+    default: False
 - disable_test_cov:
     help: Disable the test coverage evaluation part of the toolchain. 
     type: bool
     short: dTC
-    default: True
+    default: False
 - measure_runtime:
     help: Enable to measure toolchain runtime(s) and print when done.
     type: bool

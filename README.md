@@ -1,15 +1,15 @@
 # SourceToDoc
 
-Open-source toolchain for retro-actively extracting as much information regarding documentation and design as possible from arbitrary open-source software projects' source code with a minimum amount of required prior knowledge.
+Open-source toolchain for retroactively extracting as much information regarding documentation and design as possible from arbitrary open-source software projects' source code with a minimum amount of required prior knowledge.
 
 For instructions, go [here](#setup-and-usage).
 
 # About
 The main intention for this project was to create a tool to make it easier to evaluate open-source software for use in safety-related projects,
 where using open-source software often comes with the downside of being somewhat lacking when it comes to specification, documentation or proper evaluation/testing.  
-Although generating 100-page specification sheets out of "thin air" is an impossible deed, evaluating if software is suitably for safety applications or even properly producing extensive specifications is much easier when there already is "some foundation" rather tahn "thin air".      
+Although generating 100-page specification sheets out of "thin air" is an impossible deed, evaluating whether software is suitable for safety applications (or producing extensive specifications) is much easier when there already is "some foundation" rather than "thin air".
 
-The toolchain is built around various open-source tools and aims to provide good usability to be accessibly to any user without much of a learning curve, while also being a powerful, feature-rich, highly configurable tool when desired.  
+The toolchain is built around various open-source tools and aims to provide good usability to be accessible to any user without much of a learning curve, while also being a powerful, feature-rich, highly configurable tool when desired.
 Currently, the toolchain consists of three "major tools":
 - **Comment Converter:** Modify comments/non-functional sections of a project's source code to be better suited for upcoming steps. This includes: 
   - minor formatting changes to make previously overlooked (due to improper formatting) comments appear where they refer to
@@ -27,22 +27,22 @@ Currently, the toolchain consists of three "major tools":
   - find out if the existing tests provide quality or if they are just for show
   - measure combined and test coverage for each part of the project (down to per-function level) separately and identify untested sections
   - outputs also as web-server-ready HTML pages
-  - when (API) documentation was generated, pages regarding teh same files/functions are interlinked (i. e. test coverage site of main.cpp contains a link to API documentation of main.cpp and vice versa)
+  - when (API) documentation was generated, pages regarding the same files/functions are interlinked (i.e. the test coverage site of main.cpp contains a link to API documentation of main.cpp and vice versa)
   - might be the first open-source, publicly available, non-commercial solution for this kind of interlinking
 
 ## Compatibility and Known Limitations
 - Generating the dot-tool-based graphics in the API documentation can increase the runtime massively, but as long as the runtime appears to be finite, they may still be worth it :)
-- The "additional" PlantUML-based graphics are still in a more "proof of concept" state, meaning they are not included in the documentation as neatly as the dot-tool-based graphics and could potentially be bloated due to including dependencie relations transcending the projects' source files 
+- The "additional" PlantUML-based graphics are still in a more "proof of concept" state, meaning they are not included in the documentation as neatly as the dot-tool-based graphics and could potentially be bloated due to including dependency relations transcending the projects' source files 
 - Automated Test Coverage Evaluation supported for meson and cmake (in certain cases) projects
 - Because of the more "open" nature of build systems like Make or CMake, they are nigh impossible to fully automate reliably for arbitrary software projects and the user may have to manually interfere more than desirable:
   - For CMake projects with already existing test(coverage) configurations, the user has to find out the proper arguments/"name" to run them in this way and provide them to toolchain as argument
   - For CMake and Make projects with no existing configuration for tests/testcoverage, the user unfortunately may have to do some modifications to the CMakeList.txt/MAKEFILE
 - Test Coverage Evaluation is only possible, if a (standard) configuration for running tests already exists
-- Interlinking of generated API documentation and test coverage reports may fail for files/directories with duplicate names (i.e. multiple `src`directories when using subprojects). however, this likely only affects interlinking of the affected files, as linking of other files, including the index pages, should still work
+- Interlinking of generated API documentation and test coverage reports may fail for files/directories with duplicate names (i.e. multiple `src` directories when using subprojects). However, this likely only affects interlinking of the affected files, as linking of other files, including the index pages, should still work
 - We have no known setup where interlinking of API documentation and test coverage reports work for meson projects when running on Windows
   - issue of getting ninja recognizing a "lcov installation" on Windows
   - Backup is to use gcovr instead of lcov, which does generate a test coverage report, but hashed filenames of gcovr output break our interlinking process
-- Running the toolchain on macOS is likely possible (with some concerns mostly regarding test coverage evaluation), but the toolchain was not tested properly in its entirety while running on macOS an we can not provide detailed installation instructions. 
+- Running the toolchain on macOS is likely possible (with some concerns mostly regarding test coverage evaluation), but the toolchain was not tested properly in its entirety while running on macOS and we can not provide detailed installation instructions.
 
 For more detailed evaluation results on various sample projects, see [EvaluationResults.md](doc/EvaluationResults.md)
 
@@ -54,7 +54,7 @@ To ensure that all submodules are also cloned, use the following command:
 git clone --recurse-submodules https://github.com/chelast55/SourceToDoc.git
 ```
 ### Linux (Debian/Ubuntu)
-When using Linux, you have to begin the following example commands with `python3` instad of `python`, if you have not installed `python-is-python3`.  
+When using Linux, you have to begin the following example commands with `python3` instead of `python`, if you have not installed `python-is-python3`.
 All Dependencies can be installed via *apt* and *pip* packet managers.  
 If you have not installed `python(3.12)` yet or your default `python(3)` version is older than `3.12`, install it first (`python3.12` and `python3.12-venv` via apt) and make sure 
 to address it with `python3.12`.  
@@ -75,14 +75,14 @@ Within the virtual environment (likely indicated by a `(venv)` at the beginning 
 (additional requirements are not required for python includes, but for running the test coverage part of the toolchain)
 ```sh
 pip install -r requirements.txt
-pip install -r requirements_additional.txt
-pip install pytest  # only required if you want to run the unit tests for this toolchain
+pip install -r requirements-testcoverage.txt
+pip install -r requirements-dev.txt  # only required if you want to run the unit tests for this toolchain
 ```
 Now, you should be able to run the whole toolchain!
 
 ### Windows
 Disclaimer: **We really do NOT recommend running the Testcoverage Evaluation part of the toolchain under Windows, if you do not ABSOLUTELY REQUIRE test coverage data in an Windows environment**.  
-The reason for this is the rather complicated installation process compared to running the toolchain under (Ubuntu) Linux and missing support for ceratin features (e. g. interlinking documentation and test coverage output for projects with meson build system (more on that later)).
+The reason for this is the rather complicated installation process compared to running the toolchain under (Ubuntu) Linux and missing support for certain features (e.g. interlinking documentation and test coverage output for projects with meson build system (more on that later)).
 
 Various Dependencies have to be installed manually on Windows.
 Most of them have installer executables:
@@ -106,8 +106,8 @@ Within the virtual environment (likely indicated by a `(venv)` at the beginning 
 (additional requirements are not required for python includes, but for running the test coverage part of the toolchain)
 ```commandline
 pip install -r requirements.txt
-pip install -r requirements_additional.txt
-pip install pytest  # only required if you want to run the unit tests for this toolchain
+pip install -r requirements-testcoverage.txt
+pip install -r requirements-dev.txt  # only required if you want to run the unit tests for this toolchain
 ```
 Now, you should be able to run the whole toolchain!
 
@@ -153,7 +153,7 @@ python main.py --project_name test --project_path <path> --converter function_co
 ```
 For more details about the comment converter tool's capabilities, see [UsageConverter.md](doc/UsageConverter.md), [AboutExtractor.md](doc/AboutExtractor.md), [AboutCommentStyleConverter.md](doc/AboutCommentStyleConverter.md) and [ArchitectureConverter.md](doc/ArchitectureConverter.md).
 
-If desired, all components of the toolchain can be disabled individually (`disable_doc_gen`for *documentation generation* and `disable_test_cov` for *test coverage evaluation*).  
+If desired, all components of the toolchain can be disabled individually (`--disable_doc_gen` for *documentation generation* and `--disable_test_cov` for *test coverage evaluation*).
 Some recommended additional options would be `--project_number` and `--project_brief`.  
 There also is another tool for generating further UML diagrams, which is not perfectly included, but runs fine (see [UsageUML.md](doc/UsageUML.md) for details).
 For all possible options, see:
@@ -183,9 +183,9 @@ python main.py --config example_config.yaml
 Note: tc_coverage_type is meson by default. Remember setting this to cmake or generic if you use these.
 
 When the testcoverage part of our toolchain set to cmake throws an error you might need to pass additional arguments to the individual build steps.
-Cmake default handling is creating a "build" folder in the root dir of the give project and executing ```cmake ..```, ```cmake --build .```, ```ctest``` and locv/genhtml from there.  
+CMake default handling is creating a "build" folder in the root directory of the given project and executing ```cmake ..```, ```cmake --build .```, ```ctest``` and lcov/genhtml from there.
 If any additional arguments are passed to the individual steps the relative path (```..``` for the configure step; ```.``` for the build step) will be overridden.  
-Therefore you need to pass the relative path aswell e.g. ```--tc_cmake_configure_args "-DCMAKE_BUILD_TYPE=Debug .."``` (take note of the "..")
+Therefore you need to pass the relative path as well, e.g. ```--tc_cmake_configure_args "-DCMAKE_BUILD_TYPE=Debug .."``` (take note of the "..")
 
 Using tc_coverage_type = generic expects usage of ```--tc_generic_report_location```, where an already built coverage report is located. This means building and executing lcov/genhtml has to be done by the user beforehand.  
 
@@ -196,7 +196,7 @@ If you used doxygen-awesome and want a similar, more "modern" look for the test 
 ## Toolchain Component Overview
 The following schematic depicts the interaction between various components of the toolchain.
 ![](doc/toolchain_overview.png)
-One thing, that is not shown, is that CLI/config args are also collected at a "single point" (whenn running `main.py`) and, following that, are preprocessed/filtered (for better usability) and, following that, redistributed to the tool they affect.
+One thing that is not shown is that CLI/config args are also collected at a "single point" (when running `main.py`) and are then preprocessed/filtered (for better usability) and redistributed to the tool they affect.
 
 ## Architectural Decision Records
 Certain fundamental architectural decisions were captured as MADRs:

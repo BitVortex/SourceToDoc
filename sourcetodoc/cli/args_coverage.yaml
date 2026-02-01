@@ -8,7 +8,7 @@
     help: Name the build folder will have. Can be nested (sub/build). Existing folder will be deleted.
     type: str
 - tc_delete_build_folder:
-    help: Use to not delete the newly created build folder in the target project.
+    help: Delete the newly created build folder in the target project after generating the report.
     type: bool
     default: False
 - tc_meson_build_location:

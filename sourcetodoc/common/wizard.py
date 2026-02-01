@@ -110,7 +110,7 @@ def run_wizard(args: Namespace):
         temp_answer_docgen = input_expect_bool(MSG_ASK_DOCGEN)
         if type(temp_answer_docgen) is str:
             print_with_replace(MSG_UNACCEPTED_ANSWER, temp_answer_docgen)
-    args.disable_doc_gen = temp_answer_docgen
+    args.disable_doc_gen = not temp_answer_docgen
 
     if temp_answer_docgen:
         temp_answer_project_number: str = input_with_replace(MSG_ASK_PROJECT_NUMBER, args.project_name)
@@ -161,7 +161,7 @@ def run_wizard(args: Namespace):
         temp_answer_testcov = input_expect_bool(MSG_ASK_TESTCOV, temp_project_name_to_path)
         if type(temp_answer_testcov) is str:
             print_with_replace(MSG_UNACCEPTED_ANSWER, temp_answer_testcov)
-    args.disable_test_cov = temp_answer_testcov
+    args.disable_test_cov = not temp_answer_testcov
 
     if temp_answer_testcov:
         temp_answer_testcov_type: str = ""
@@ -179,7 +179,7 @@ def run_wizard(args: Namespace):
             temp_answer_keep_build_folder = input_expect_bool(MSG_ASK_KEEP_BUILD_FOLDER)
             if type(temp_answer_keep_build_folder) is str:
                 print_with_replace(MSG_UNACCEPTED_ANSWER, temp_answer_keep_build_folder)
-        args.tc_keep_build_folder = temp_answer_keep_build_folder
+        args.tc_delete_build_folder = not temp_answer_keep_build_folder
 
         if args.tc_coverage_type == "meson":
             args.tc_meson_build_location = input(MSG_ASK_MESON_BUILD_LOCATION)
