@@ -9,6 +9,16 @@ SourceToDoc is a CLI toolchain for extracting and generating documentation artif
 
 If you want the longer background, see [doc/ProjectHistory.md](doc/ProjectHistory.md).
 
+## Project status
+
+This repository is not actively maintained. It is published as the outcome of a research project and is provided “as is”.
+
+Contributions are welcome, especially:
+
+- Discussions around real-world usage and integration
+- Well-scoped issues with clear reproduction steps, logs, and expected vs. actual behavior
+- Focused pull requests that improve stability, documentation, or portability
+
 ## Documentation
 
 - Start here: [doc/README.md](doc/README.md)
@@ -97,7 +107,3 @@ python -m pytest
 ## License
 
 See [LICENSE](LICENSE).
-To ensure that all submodules are also cloned, use the following command:
-```sh
-<!-- Detailed usage notes and background are intentionally in doc/ to keep this README focused. -->
-venv\Scripts\Activate.ps1
